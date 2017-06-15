@@ -4,15 +4,34 @@
 \usepackage{subfigure}
 \usepackage{float}
 \usepackage[colorlinks,linkcolor=black]{hyperref}%colorlinks启用链接颜色，linkcolor指定对应的颜色
+
+\usepackage{listings}
+%\usepackage[cache=false]{minted}  % 代码高亮X
+\usepackage{fontspec}
+\usepackage{tikz,xcolor,mwe}
+\definecolor{cvgreen}{HTML}{92D14F}
+\definecolor{cvgray}{HTML}{D8E4BE}
+\definecolor{cvtext}{HTML}{92909B}
+\usetikzlibrary{shadows}
+
 \pagestyle{empty}
 \begin{document}
+\begin{tikzpicture}[remember picture,overlay] 
+\fill[cvgreen] (current page.north west) rectangle ([xshift=6cm]current page.south west);% green bar
+\fill[cvgray] ([yshift=-11cm]current page.north west) rectangle ([yshift=-17cm]current page.north east); % gray bar
 
-\begin{center}
-\huge \textbf{Git简单教程}
-\end{center}
-
+\node[cvtext,right] at ([xshift=3.5cm,yshift=-13cm]current page.north west) {\Huge Git Reference};
+\node[cvtext,above left] at ([xshift=-1cm,yshift=-16.5cm]current page.north east) {\Large\bfseries \today};
+% cover photo
+\node[inner sep=0pt,below right] (image) at ([xshift=17cm,yshift=-1cm]current page.north west) {\includegraphics[width=3cm]{hainulogo.png}};
+% name and address
+\node[fill=white,align=center,text width=6.4cm,inner sep=0.8cm,below] (name) at (image.south) {};
+\node[text width=15cm,inner sep=0.3cm,below right] at (name.south west){\Large Author:Flynn\\E-Mail:zofon@qq.com};
+% attachments
+\node[white,text width=5cm,inner sep=0.6cm,above right] at ([yshift=1cm]current page.south west)
+{\large\obeylines\textbf{This is for \\The Hi-Net Group}};  
+\end{tikzpicture}
 \tableofcontents
-\newpage
 \chapter{git介绍}
 Git是一款免费、开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目。
 
@@ -21,7 +40,7 @@ Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个�
 在国内这样的托管平台有码云，阿里云等等。
 
 \textcolor[rgb]{0.00,1.00,0.25}{本文以BitBucket为例介绍git的使用方法}
-\chapter{git平台介绍}
+
 \section{BitBucket简介}
 BitBucket是一家源代码托管网站，默认的免费账号，可以总共有5个帐户对你的私有库进行读写。他们给非营利组织(NPO)和大学生免费申请无限账号的机会。何为无限账号：Bitbucket提供每个用户无限公开和私有库，唯一限制的是对私有库有读写权限的帐户总数。适合小型的团体协作。\\
 官网地址：\url{https://bitbucket.org/}
@@ -31,7 +50,6 @@ GitHub 是一个面向开源及私有软件项目的托管平台，因为只支�
 \section{阿里云简介}
 \url{https://code.aliyun.com/}
 
-\newpage
 \chapter{创建仓库}
 \begin{itemize}
   \item 在\url{https://bitbucket.org}上面创建一个账号。
@@ -67,7 +85,6 @@ GitHub 是一个面向开源及私有软件项目的托管平台，因为只支�
 复制到剪切板：cat ~/.ssh/id_rarsa.pub | xclip -sel clip
 \end{verbatim}
 
-\newpage
 \chapter{团队协作}
 \section{邀请别人对你的仓库进行读写}
 
@@ -111,7 +128,6 @@ git clone git@bitbucket.org:zofon/bitbucket_reference.git
 %git clone git@bitbucket.org:zofon/design_ubuntu.git
 %\end{verbatim}
 
-\newpage
 \section{pull操作基本步骤}
 要养成进入仓库先 git pull一下的习惯。这样子可以省去很多麻烦。在一个人使用仓库的时候，只有一个分支，只需要简单的 git pull 命令即可。当多个人在仓库工作的时候，可以用 git pull --all 命令将全部的分支都pull下来，然后处理。
 
@@ -176,7 +192,6 @@ git reset --hard
 \end{verbatim}
 回退到之前的版本之后，可能会出现无法push的情况，这个时候如果是自己一个在使用的话，可以强制push，命令如下：\verb|git push -f|
 
-\newpage
 \section{常用命令介绍}
 \begin{description}
   \item[git clone] 在如下的位置找到克隆的地址,可以使用该命令将云端的仓库克隆到本地。
@@ -203,7 +218,6 @@ git reset --hard
   \item[git push] 将提交的内容push到云端。
 \end{description}
 
-\newpage
 \chapter{常见问题}
 \section{git commit -m 'Initial commit with contributors' 时候出现错误}
 错误信息如下：

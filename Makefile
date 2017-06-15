@@ -7,6 +7,6 @@ ${NAME}.pdf:${NAME}.tex
 
 clean:
 	rm -f *.aux *.log *.synctex *.aux *.tex.bak *.toc *.out
-	
+	rm *synctex.gz
 really-clean: clean
 	rm -f *.pdf
