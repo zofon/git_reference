@@ -4,7 +4,7 @@
 \usepackage{subfigure}
 \usepackage{float}
 \usepackage[colorlinks,linkcolor=black]{hyperref}%colorlinks启用链接颜色，linkcolor指定对应的颜色
-
+\CTEXsetup[format={\Large\bfseries}]{section}  
 \usepackage{listings}
 %\usepackage[cache=false]{minted}  % 代码高亮X
 \usepackage{fontspec}
@@ -16,11 +16,13 @@
 
 \pagestyle{empty}
 \begin{document}
+\begin{flushleft}
+		
 \begin{tikzpicture}[remember picture,overlay] 
 \fill[cvgreen] (current page.north west) rectangle ([xshift=6cm]current page.south west);% green bar
 \fill[cvgray] ([yshift=-11cm]current page.north west) rectangle ([yshift=-17cm]current page.north east); % gray bar
 
-\node[cvtext,right] at ([xshift=3.5cm,yshift=-13cm]current page.north west) {\Huge Git Reference};
+\node[cvtext,right] at ([xshift=6cm,yshift=-13cm]current page.north west) {\Huge Git Reference};
 \node[cvtext,above left] at ([xshift=-1cm,yshift=-16.5cm]current page.north east) {\Large\bfseries \today};
 % cover photo
 \node[inner sep=0pt,below right] (image) at ([xshift=17cm,yshift=-1cm]current page.north west) {\includegraphics[width=3cm]{hainulogo.png}};
@@ -97,9 +99,14 @@ GitHub毕竟老牌托管平台，不知道是不是在中国有服务器，但�
 复制到剪切板：cat ~/.ssh/id_rarsa.pub | xclip -sel clip
 \end{verbatim}
 
-\chapter{团队协作}
-\section{邀请别人对你的仓库进行读写}
+\section{注意点}
+在使用阿里云code的时候，好像必须要上传一个ssh key，不然是没有访问权限的。
+（根据我的经验，在git pull的时候出现权限问题，只要上传你的ssh key 就可以解决问题。）
 
+
+\chapter{团队协作}
+Git对于团队协作来说非常重要，尽管有一些学习曲线，还是希望能完全掌握这个技能。
+我们可以邀请别人进入自己的仓库，也可以接受邀请进入别人的仓库。
 \section{接受别人的邀请}
 别人邀请你加入他的仓库，你会收到一封邮件，按照提示进行操作，完成之后进入自己的Bitbucket账号，点击如下按钮：
 \begin{figure}[H]
@@ -141,9 +148,8 @@ git clone git@bitbucket.org:zofon/bitbucket_reference.git
 %\end{verbatim}
 
 \section{pull操作基本步骤}
-要养成进入仓库先 git pull一下的习惯。这样子可以省去很多麻烦。在一个人使用仓库的时候，只有一个分支，只需要简单的 git pull 命令即可。当多个人在仓库工作的时候，可以用 git pull --all 命令将全部的分支都pull下来，然后处理。
+\textbf{要养成进入仓库先 git pull一下的习惯。}这样子可以省去很多麻烦。在一个人使用仓库的时候，只有一个分支，只需要简单的 git pull 命令即可。当多个人在仓库工作的时候，可以用 git pull --all 命令将全部的分支都pull下来，然后处理。
 
-\newpage
 \section{push操作基本步骤}
 在初始化仓库的时候是需要一个
 \begin{itemize}
@@ -160,6 +166,21 @@ git clone git@bitbucket.org:zofon/bitbucket_reference.git
   \item git push origin zhoufeng
 \end{itemize}
 
+\section{邀请别人对你的仓库进行读写}
+在不同的平台上面方法有一点区别，在GitHub上邀请的时候需要被邀请者登录确认才算是添加进了仓库。
+邀请一个人对你的仓库访问的时候有三种权限:
+\begin{description}
+	\item[master] 和仓库所有者的权限非常接近，可以push到origin分支。
+	\item[develper] 权限次于master，可以向仓库提交内容，但是不能push到origin分支。
+	\item[reader] 只能读取仓库的权限。
+\end{description}
+当然了，在不同的平台中，可能有其他的权限表示方式，反正大概就是这三个等级。
+
+\section{小结}
+邀请别人参加到你的项目中时候注意设置被邀请者的权限。
+
+
+\chapter{其他操作命令}
 \section{多分支操作}
 \begin{description}
   \item[git branch -a]  查看所有的分支。
@@ -200,7 +221,7 @@ git reset --hard
 例如：我要彻底返回在上一次提交以前的版本。git reset --hrad HEAD~1
 
 git reset --hard
-#我要回到上一次提交的版本。
+#回到上一次提交的版本。
 \end{verbatim}
 回退到之前的版本之后，可能会出现无法push的情况，这个时候如果是自己一个在使用的话，可以强制push，命令如下：\verb|git push -f|
 
@@ -296,6 +317,8 @@ fatal: early EOF
 fatal: unpack-objects failed
 \end{verbatim}
 这个问题我也不清楚是什么情况，解决方法就是彻底删掉这个版本库，然后重新克隆。有效。
+
+\end{flushleft}
 \end{document}
 
 
