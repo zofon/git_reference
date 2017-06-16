@@ -142,7 +142,7 @@ git clone git@bitbucket.org:zofon/bitbucket_reference.git
 \textbf{要养成进入仓库先 git pull一下的习惯。}这样子可以省去很多麻烦。在一个人使用仓库的时候，只有一个分支，只需要简单的 git pull 命令即可。当多个人在仓库工作的时候，可以用 git pull --all 命令将全部的分支都pull下来，然后处理。
 
 \section{push操作基本步骤}
-在初始化仓库的时候是需要一个
+在修改好文件之后，需要把修改的内容push到仓库，基础的步骤如下：
 \begin{itemize}
    \item git add test.tex
    \item git commit -m "Describation"
@@ -150,11 +150,11 @@ git clone git@bitbucket.org:zofon/bitbucket_reference.git
 \end{itemize}
 如果权限不是最高权限，不能push到master分支上的时候，可以自己在本地新建一个分支，然后将该分支push到仓库。
 \begin{itemize}
-  \item git branch zhoufeng
-  \item git checkout zhoufeng
-  \item git add --all
-  \item git commit -m "Descriptions"
-  \item git push origin zhoufeng
+  \item git branch zhoufeng~~~~~~~~~~~~#首先创建一个分支。
+  \item git checkout zhoufeng~~~~~~~~~~#切换到新建的这个分支。
+  \item git add --all~~~~~~~~~~~~~~~~~~#添加准备push的内容。
+  \item git commit -m "Descriptions"~~~#添加描述，让仓库所有者明白你要提交的内容。
+  \item git push origin zhoufeng~~~~~~~#push到该分支。
 \end{itemize}
 
 \section{邀请别人对你的仓库进行读写}
